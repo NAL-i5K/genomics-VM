@@ -78,8 +78,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # use EPEL: https://fedoraproject.org/wiki/EPEL
     wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-    sudo rpm -ivh epel-release-7-8.noarch.rpm
-    rm epel-release-7-8.noarch.rpm
+    sudo rpm -ivh epel-release-6-8.noarch.rpm
+    rm epel-release-6-8.noarch.rpm
     # general update of system
     sudo yum update
     # install GUI desktop
@@ -100,6 +100,32 @@ Vagrant.configure("2") do |config|
     sudo make install install-doc install-html
     cd ..
     rm -rf git-2.4.4 git-2.4.4.tar.xz
+    # install samtools
+    sudo yum install --enablerepo=epel -y ncurses-devel zlib-devel bzip2-devel xz-devel
+    wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+    tar xvjf samtools-1.9.tar.bz2
+    cd samtools-1.9
+    sudo ./configure --prefix=/usr/local
+    sudo make
+    sudo make install
+    cd ..
+    rm -rf samtools-1.9.tar.bz2 samtools-1.9
+    # install glibc 2.17 (dependency of wig2BigWig)
+    # https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174#gistcomment-2083385
+    SERVER=http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/
+    REPO64=epel-6-x86_64
+    VERSION=glibc-2.17-55.fc20
+    SERVER64=$SERVER/$REPO64/$VERSION
+    sudo rpm -Uvh --force --nodeps $SERVER64/glibc-2.17-55.el6.x86_64.rpm $SERVER64/glibc-common-2.17-55.el6.x86_64.rpm $SERVER64/glibc-devel-2.17-55.el6.x86_64.rpm $SERVER64/glibc-headers-2.17-55.el6.x86_64.rpm $SERVER64/glibc-static-2.17-55.el6.x86_64.rpm
+    # install zlib 1.2.7 (dependency of wig2BigWig)
+    sudo rpm -Uvh --force --nodeps https://rpmfind.net/linux/centos/7.5.1804/os/x86_64/Packages/zlib-1.2.7-17.el7.x86_64.rpm
+    # download wig2BigWig
+    sudo wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/wigToBigWig -O /usr/local/bin/wigToBigWig
+    sudo chmod +x /usr/local/bin/wigToBigWig
+    # clone tools used
+    git clone https://github.com/NAL-i5K/coordinates_conversion
+    git clone https://github.com/NAL-i5K/wiggle-tools
+    git clone https://github.com/NAL-i5K/bam_to_bigwig
     reboot # reboot to load GUI
   SHELL
 end

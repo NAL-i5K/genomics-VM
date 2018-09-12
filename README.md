@@ -27,12 +27,13 @@ Setup your development environment for genomics applications easily by setting u
 
 - CentOS 6.9
 - git 2.24
+- samtools 1.9
+- wigToBigWig
 
 ## Future development plan
 
 Following tools will be installed into VM in the future:
 
-- samtools 1.9
 - wiggle-tools
 - bam_to_bigwig
 - coordinate_conversion
