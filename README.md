@@ -37,3 +37,6 @@ Following tools will be installed into VM in the future:
 - wiggle-tools
 - bam_to_bigwig
 - coordinate_conversion
+- genomics-workspace
+- apollo
+- jbrowse
