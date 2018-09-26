@@ -4,7 +4,7 @@ Setup your development environment for genomics applications easily by setting u
 
 ## Prerequisite
 
-- Vagrant
+- Vagrant > 2.0
 - Virtual Box
 
 ## Installation
