@@ -1,5 +1,7 @@
 # genomics-VM
 
+[![Build Status](https://travis-ci.org/NAL-i5K/genomics-VM.svg?branch=master)](https://travis-ci.org/NAL-i5K/genomics-VM)
+
 Setup your development environment for genomics applications easily by setting up a Virtualbox VM through Vagrant.
 
 ## Prerequisite
