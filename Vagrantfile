@@ -102,15 +102,15 @@ Vagrant.configure('2') do |config|
     # Install newer git version
     sudo yum install -y curl-devel expat-devel libcurl-devel perl-devel asciidoc \
       xmlto xz zlib-devel zlib-static gettext
-    curl -kOL https://www.kernel.org/pub/software/scm/git/git-2.4.4.tar.xz
-    tar xvf git-2.4.4.tar.xz
-    cd git-2.4.4
+    curl -kOL https://www.kernel.org/pub/software/scm/git/git-2.18.0.tar.xz
+    tar xvf git-2.18.0.tar.xz
+    cd git-2.18.0
     make configure
     ./configure --prefix=/usr
     make all
     sudo make install install-doc install-html
     cd /home/vagrant
-    rm -rf git-2.4.4 git-2.4.4.tar.xz
+    rm -rf git-2.18.0 git-2.18.0.tar.xz
 
     # Install python2.7
     cd /home/vagrant
