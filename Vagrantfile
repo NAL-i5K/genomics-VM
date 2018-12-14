@@ -213,6 +213,10 @@ Vagrant.configure('2') do |config|
     mkdir -p /app/data/other-species
     mkdir -p /app/data/scratch
     mkdir -p /app/data/working-files
+    
+    cd /home/vagrant/app/data/blat
+    wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/faToTwoBit
+    cd /home/vagrant
 
     # Fix the permission of the folders
     sudo chown -R vagrant /app
