@@ -213,10 +213,34 @@ Vagrant.configure('2') do |config|
     mkdir -p /app/data/other-species
     mkdir -p /app/data/scratch
     mkdir -p /app/data/working-files
+    mkdir -p /app/data/tools
 
-    cd /home/vagrant/app/data/blat
-    wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/faToTwoBit
-    cd /home/vagrant
+
+# install the Kent tools for data processing
+  
+#install needed libraries 
+
+    sudo yum install -y mysql
+    sudo yum install -y mysql-devel
+    sudo yum install -y libpng
+    sudo yum install -y libpng-devel
+    sudo yum install -y openssl
+    sudo yum install -y openssl-devel
+    sudo yum install -y libstdc++-devel
+
+    cd /home/vagrant/app/data/tools/
+    wget http://hgdownload.soe.ucsc.edu/admin/exe/userApps.archive/userApps.v326.src.tgz
+    tar -xvzf userApps.v326.src.tgz
+    sudo chown -R vagrant:vagrant userApps
+    cd userApps
+
+    make
+
+
+#    cd /home/vagrant/app/data/blat
+#    wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/faToTwoBit
+#    cd /home/vagrant
+
 
     # Fix the permission of the folders
     sudo chown -R vagrant /app
