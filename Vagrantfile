@@ -217,8 +217,8 @@ Vagrant.configure('2') do |config|
 
 
 # install the Kent tools for data processing
-  
-#install needed libraries 
+
+#install needed libraries
 
     sudo yum install -y mysql
     sudo yum install -y mysql-devel
