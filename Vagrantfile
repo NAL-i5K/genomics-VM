@@ -152,7 +152,7 @@ Vagrant.configure('2') do |config|
 
         # Install the PostgreSQL (9.5)
         echo 'exclude=postgresql*' | sudo tee -a /etc/yum.repos.d/CentOS-Base.repo  # add line to yum repository
-        sudo yum -y install http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-2.noarch.rpm  # install the PostgreSQL Global Development Group (PGDG) RPM file:
+        sudo yum -y install http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-3.noarch.rpm  # install the PostgreSQL Global Development Group (PGDG) RPM file:
         sudo yum -y install postgresql95-server postgresql95-contrib postgresql95-devel
         sudo service postgresql-9.5 initdb  # initialize (uses default data directory: /var/lib/pgsql)
         sudo chkconfig postgresql-9.5 on  # make PostgreSQL startup at boot:
@@ -246,11 +246,11 @@ Vagrant.configure('2') do |config|
 
         # Fix the permission of the folders
         sudo chown -R vagrant /app
-        sudo chown -R vagrant wiggle-tools
-        sudo chown -R vagrant genomics-workspace
-        sudo chown -R vagrant bam_to_bigwig
-        sudo chown -R vagrant apollo2_data_build_scripts
-        sudo chown -R vagrant jbrowse
+        sudo chown -R vagrant /home/vagrant/wiggle-tools
+        sudo chown -R vagrant /home/vagrant/genomics-workspace
+        sudo chown -R vagrant /home/vagrant/bam_to_bigwig
+        sudo chown -R vagrant /home/vagrant/apollo2_data_build_scripts
+        sudo chown -R vagrant /home/vagrant/jbrowse
 
         reboot # reboot to load GUI
   SHELL
