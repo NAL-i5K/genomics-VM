@@ -207,8 +207,8 @@ Vagrant.configure('2') do |config|
         cd /home/vagrant
         git clone https://github.com/NAL-i5K/wiggle-tools
         git clone https://github.com/NAL-i5K/bam_to_bigwig
-        git clone https://gitlab.com/i5k_Workspace/apollo2_data_build_scripts.git
-       	git clone https://github.com/GMOD/jbrowse
+	git clone https://github.com/NAL-i5K/content_onboarding_scripts
+	git clone https://github.com/GMOD/jbrowse
 
         # Create directories used
         mkdir -p /app/data/blat
