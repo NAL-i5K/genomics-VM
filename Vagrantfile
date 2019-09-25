@@ -210,6 +210,14 @@ Vagrant.configure('2') do |config|
 	git clone https://github.com/NAL-i5K/content_onboarding_scripts
 	git clone https://github.com/GMOD/jbrowse
 
+	#Make other tools executable
+        sudo chmod +x /home/vagrant/wiggle-tools/GCcontent2bigwig.py
+        sudo chmod +x /home/vagrant/wiggle-tools/gap2bigwig.py
+	sudo chmod +x /home/vagrant/bam_to_bigwig/bam_to_bigwig.py
+	sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/add_metadata_to_GC_gap_bigwig_tracks.pl
+        sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/createOrganism.py
+	sudo chmod -R +x /home/vagrant/jbrowse/bin
+
         # Create directories used
         mkdir -p /app/data/blat
         mkdir -p /app/data/other-species
