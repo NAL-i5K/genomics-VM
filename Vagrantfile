@@ -254,5 +254,6 @@ Vagrant.configure('2') do |config|
            sudo chown -R vagrant:vagrant /home/vagrant/jbrowse
 
            reboot # reboot to load GUI
+
   SHELL
 end
