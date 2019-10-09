@@ -2,7 +2,7 @@ os: linux
 language: ruby
 rvm: 2.3
 before_script:
-  - gem install rubocop
+  - gem install rubocop -v 0.68.1
   - gem install awesome_bot
 script:
   - rubocop Vagrantfile
