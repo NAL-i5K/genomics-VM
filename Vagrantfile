@@ -235,8 +235,8 @@ Vagrant.configure('2') do |config|
         tar -xvzf userApps.v326.src.tgz
         sudo chown -R vagrant:vagrant userApps
         cd userApps
-
         make
+	cd
 
 
     #    cd /home/vagrant/app/data/blat
@@ -245,12 +245,12 @@ Vagrant.configure('2') do |config|
 
 
         # Fix the permission of the folders
-        sudo chown -R vagrant /app
-        sudo chown -R vagrant /home/vagrant/wiggle-tools
-        sudo chown -R vagrant /home/vagrant/genomics-workspace
-        sudo chown -R vagrant /home/vagrant/bam_to_bigwig
-        sudo chown -R vagrant /home/vagrant/apollo2_data_build_scripts
-        sudo chown -R vagrant /home/vagrant/jbrowse
+        sudo chown -R vagrant:vagrant /app
+        sudo chown -R vagrant:vagrant /home/vagrant/wiggle-tools
+        sudo chown -R vagrant:vagrant /home/vagrant/genomics-workspace
+        sudo chown -R vagrant:vagrant /home/vagrant/bam_to_bigwig
+        sudo chown -R vagrant:vagrant /home/vagrant/apollo2_data_build_scripts
+        sudo chown -R vagrant:vagrant /home/vagrant/jbrowse
 
         reboot # reboot to load GUI
   SHELL
