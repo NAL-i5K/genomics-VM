@@ -1,6 +1,6 @@
 os: linux
 language: ruby
-rvm: 2.2
+rvm: 2.3
 before_script:
   - gem install rubocop
   - gem install awesome_bot
