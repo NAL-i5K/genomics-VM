@@ -226,7 +226,8 @@ Vagrant.configure('2') do |config|
            mkdir -p /app/data/tools
 
     #Add tools to PATH
-    export PATH=$PATH:/home/vagrant/wiggle-tools:/home/vagrant/bam_to_bigwig:/home/vagrant/content_onboarding_scripts/bin:/home/vagrant/jbrowse/bin
+    sed 's/PATH\=/PATH\=\/home\/vagrant\/wiggle-tools\:\/home\/vagrant\/bam_to_bigwig:\/home\/vagrant\/content_onboarding_scripts\/bin\:\/home\/vagrant\/jbrowse\/bin\:/g' .bash_profile
+    #export PATH=$PATH:/home/vagrant/wiggle-tools:/home/vagrant/bam_to_bigwig:/home/vagrant/content_onboarding_scripts/bin:/home/vagrant/jbrowse/bin
 
 
        # install the Kent tools for data processing
