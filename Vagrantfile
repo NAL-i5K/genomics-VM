@@ -229,7 +229,7 @@ Vagrant.configure('2') do |config|
            mkdir -p /app/data/tools
 
     #Add tools to PATH
-    sed 's/PATH\=/PATH\=\/home\/vagrant\/wiggle-tools\:\/home\/vagrant\/bam_to_bigwig:\/home\/vagrant\/content_onboarding_scripts\/bin\:\/home\/vagrant\/jbrowse\/bin\:/g' .bash_profile
+    sed -i 's/PATH\=/PATH\=\/home\/vagrant\/wiggle-tools\:\/home\/vagrant\/bam_to_bigwig:\/home\/vagrant\/content_onboarding_scripts\/bin\:\/home\/vagrant\/jbrowse\/bin\:\/app\/data\/tools\/userApps\/bin\:/g' .bash_profile
     #export PATH=$PATH:/home/vagrant/wiggle-tools:/home/vagrant/bam_to_bigwig:/home/vagrant/content_onboarding_scripts/bin:/home/vagrant/jbrowse/bin
 
        # install the Kent tools for data processing
@@ -244,7 +244,7 @@ Vagrant.configure('2') do |config|
            sudo yum install -y openssl-devel
            sudo yum install -y libstdc++-devel
 
-           cd /home/vagrant/app/data/tools/
+           cd /app/data/tools/
            wget http://hgdownload.soe.ucsc.edu/admin/exe/userApps.archive/userApps.v326.src.tgz
            tar -xvzf userApps.v326.src.tgz
            sudo chown -R vagrant:vagrant userApps
@@ -263,7 +263,7 @@ Vagrant.configure('2') do |config|
            sudo chown -R vagrant:vagrant /home/vagrant/wiggle-tools
            sudo chown -R vagrant:vagrant /home/vagrant/genomics-workspace
            sudo chown -R vagrant:vagrant /home/vagrant/bam_to_bigwig
-           sudo chown -R vagrant:vagrant /home/vagrant/apollo2_data_build_scripts
+           sudo chown -R vagrant:vagrant /home/vagrant/content_onboarding_scripts
            sudo chown -R vagrant:vagrant /home/vagrant/jbrowse
 
            reboot # reboot to load GUI
