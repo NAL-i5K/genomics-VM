@@ -101,6 +101,18 @@ Vagrant.configure('2') do |config|
            # https://forums.anandtech.com/threads/fonts-screwed-up-in-centos-6-terminal.2186468/
            sudo yum -y install terminus-fonts terminus-fonts-console
 
+       	# Install glibc 2.17 (dependency of wig2BigWig)
+       	# https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174#gistcomment-2083385
+       	SERVER=http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/
+       	REPO64=epel-6-x86_64
+       	VERSION=glibc-2.17-55.fc20
+       	SERVER64=$SERVER/$REPO64/$VERSION
+       	sudo rpm -Uvh --force --nodeps $SERVER64/glibc-2.17-55.el6.x86_64.rpm $SERVER64/glibc-common-2.17-55.el6.x86_64.rpm $SERVER64/glibc-devel-2.17-55.el6.x86_64.rpm $SERVER64/glibc-headers-2.17-55.el6.x86_64.rpm $SERVER64/glibc-static-2.17-55.el6.x86_64.rpm
+       	# Install zlib 1.2.7 (dependency of wig2BigWig)
+       	sudo rpm -Uvh --force --nodeps https://rpmfind.net/linux/centos/7/os/x86_64/Packages/zlib-devel-1.2.7-18.el7.x86_64.rpm
+       	sudo rpm -Uvh --force --nodeps https://rpmfind.net/linux/centos/7/os/x86_64/Packages/zlib-1.2.7-18.el7.x86_64.rpm
+       	sudo rpm -Uvh --force --nodeps https://rpmfind.net/linux/centos/7/os/x86_64/Packages/zlib-static-1.2.7-18.el7.x86_64.rpm
+
            # Install newer git version
            sudo yum install -y curl-devel expat-devel libcurl-devel perl-devel asciidoc \
              xmlto xz zlib-devel zlib-static gettext
@@ -172,17 +184,6 @@ Vagrant.configure('2') do |config|
            cd /home/vagrant
            rm -rf samtools-1.9.tar.bz2 samtools-1.9
 
-           # Install glibc 2.17 (dependency of wig2BigWig)
-           # https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174#gistcomment-2083385
-           SERVER=http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/
-           REPO64=epel-6-x86_64
-           VERSION=glibc-2.17-55.fc20
-           SERVER64=$SERVER/$REPO64/$VERSION
-           sudo rpm -Uvh --force --nodeps $SERVER64/glibc-2.17-55.el6.x86_64.rpm $SERVER64/glibc-common-2.17-55.el6.x86_64.rpm $SERVER64/glibc-devel-2.17-55.el6.x86_64.rpm $SERVER64/glibc-headers-2.17-55.el6.x86_64.rpm $SERVER64/glibc-static-2.17-55.el6.x86_64.rpm
-
-           # Install zlib 1.2.7 (dependency of wig2BigWig)
-           sudo rpm -Uvh --force --nodeps https://rpmfind.net/linux/centos/7.5.1804/os/x86_64/Packages/zlib-1.2.7-17.el7.x86_64.rpm
-
            # Download wig2BigWig
            sudo wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/wigToBigWig -O /usr/local/bin/wigToBigWig
            sudo chmod +x /usr/local/bin/wigToBigWig
@@ -217,6 +218,8 @@ Vagrant.configure('2') do |config|
     sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/add_metadata_to_GC_gap_bigwig_tracks.pl
            sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/createOrganism.py
     sudo chmod -R +x /home/vagrant/jbrowse/bin
+           #git clone https://gitlab.com/i5k_Workspace/apollo2_data_build_scripts.git
+           #git clone https://github.com/GMOD/jbrowse
 
            # Create directories used
            mkdir -p /app/data/blat
@@ -228,7 +231,6 @@ Vagrant.configure('2') do |config|
     #Add tools to PATH
     sed 's/PATH\=/PATH\=\/home\/vagrant\/wiggle-tools\:\/home\/vagrant\/bam_to_bigwig:\/home\/vagrant\/content_onboarding_scripts\/bin\:\/home\/vagrant\/jbrowse\/bin\:/g' .bash_profile
     #export PATH=$PATH:/home/vagrant/wiggle-tools:/home/vagrant/bam_to_bigwig:/home/vagrant/content_onboarding_scripts/bin:/home/vagrant/jbrowse/bin
-
 
        # install the Kent tools for data processing
 
@@ -247,8 +249,8 @@ Vagrant.configure('2') do |config|
            tar -xvzf userApps.v326.src.tgz
            sudo chown -R vagrant:vagrant userApps
            cd userApps
-
            make
+           cd
 
 
        #    cd /home/vagrant/app/data/blat
@@ -257,13 +259,14 @@ Vagrant.configure('2') do |config|
 
 
            # Fix the permission of the folders
-           sudo chown -R vagrant /app
-           sudo chown -R vagrant /home/vagrant/wiggle-tools
-           sudo chown -R vagrant /home/vagrant/genomics-workspace
-           sudo chown -R vagrant /home/vagrant/bam_to_bigwig
-           sudo chown -R vagrant /home/vagrant/apollo2_data_build_scripts
-           sudo chown -R vagrant /home/vagrant/jbrowse
+           sudo chown -R vagrant:vagrant /app
+           sudo chown -R vagrant:vagrant /home/vagrant/wiggle-tools
+           sudo chown -R vagrant:vagrant /home/vagrant/genomics-workspace
+           sudo chown -R vagrant:vagrant /home/vagrant/bam_to_bigwig
+           sudo chown -R vagrant:vagrant /home/vagrant/apollo2_data_build_scripts
+           sudo chown -R vagrant:vagrant /home/vagrant/jbrowse
 
            reboot # reboot to load GUI
+
   SHELL
 end
