@@ -208,8 +208,18 @@ Vagrant.configure('2') do |config|
            cd /home/vagrant
            git clone https://github.com/NAL-i5K/wiggle-tools
            git clone https://github.com/NAL-i5K/bam_to_bigwig
-           git clone https://gitlab.com/i5k_Workspace/apollo2_data_build_scripts.git
-          	git clone https://github.com/GMOD/jbrowse
+    git clone https://github.com/NAL-i5K/content_onboarding_scripts
+    git clone https://github.com/GMOD/jbrowse
+
+    #Make other tools executable
+           sudo chmod +x /home/vagrant/wiggle-tools/GCcontent2bigwig.py
+           sudo chmod +x /home/vagrant/wiggle-tools/gap2bigwig.py
+    sudo chmod +x /home/vagrant/bam_to_bigwig/bam_to_bigwig.py
+    sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/add_metadata_to_GC_gap_bigwig_tracks.pl
+           sudo chmod +x /home/vagrant/content_onboarding_scripts/bin/createOrganism.py
+    sudo chmod -R +x /home/vagrant/jbrowse/bin
+           #git clone https://gitlab.com/i5k_Workspace/apollo2_data_build_scripts.git
+           #git clone https://github.com/GMOD/jbrowse
 
            # Create directories used
            mkdir -p /app/data/blat
@@ -218,6 +228,9 @@ Vagrant.configure('2') do |config|
            mkdir -p /app/data/working-files
            mkdir -p /app/data/tools
 
+    #Add tools to PATH
+    sed 's/PATH\=/PATH\=\/home\/vagrant\/wiggle-tools\:\/home\/vagrant\/bam_to_bigwig:\/home\/vagrant\/content_onboarding_scripts\/bin\:\/home\/vagrant\/jbrowse\/bin\:/g' .bash_profile
+    #export PATH=$PATH:/home/vagrant/wiggle-tools:/home/vagrant/bam_to_bigwig:/home/vagrant/content_onboarding_scripts/bin:/home/vagrant/jbrowse/bin
 
        # install the Kent tools for data processing
 
@@ -237,7 +250,7 @@ Vagrant.configure('2') do |config|
            sudo chown -R vagrant:vagrant userApps
            cd userApps
            make
-    cd
+           cd
 
 
        #    cd /home/vagrant/app/data/blat
