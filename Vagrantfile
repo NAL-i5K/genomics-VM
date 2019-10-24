@@ -165,7 +165,7 @@ Vagrant.configure('2') do |config|
 
     # Install the PostgreSQL (9.5)
     echo 'exclude=postgresql*' | sudo tee -a /etc/yum.repos.d/CentOS-Base.repo  # add line to yum repository
-    sudo yum -y install http://yum.postgresql.org/9.5/redhat/rhel-6-x86_64/pgdg-centos95-9.5-2.noarch.rpm  # install the PostgreSQL Global Development Group (PGDG) RPM file:
+    sudo yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-6-x86_64/pgdg-redhat-repo-latest.noarch.rpm  # install the PostgreSQL Global Development Group (PGDG) RPM file:
     sudo yum -y install postgresql95-server postgresql95-contrib postgresql95-devel
     sudo service postgresql-9.5 initdb  # initialize (uses default data directory: /var/lib/pgsql)
     sudo chkconfig postgresql-9.5 on  # make PostgreSQL startup at boot:
